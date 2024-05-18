@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    overflow: hidden;
+}
+
+img{
+    max-width: 100%;
+    display: block;
+}
+
+.grid-responsive{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-tab:hover .event-button{
+    transform: translateY(0);
+}
+
+.show-modal{
+    animation: showModal 500ms forwards;
+}
+
+.hide-modal{
+    animation: hideModal 500ms forwards;
+}
+
+@keyframes showModal {
+    
+    0%{
+        opacity: 0;
+        transform: scale(0.7);
+        display: block;
+    }
+    30%{
+       opacity: 1; 
+    }
+    100%{
+        transform: scale(1);
+    }
+
+}
+
+@keyframes hideModal {
+    
+    0%{
+        opacity: 1;
+        transform: scale(1);
+    }
+    100%{
+        opacity: 0;
+    }
+
+}
