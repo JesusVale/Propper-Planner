@@ -1,4 +1,7 @@
+import { FormEvent } from "react";
 import ModalWrapper from "./ModalWrapper";
+import { createEvent } from "../../services/events";
+import useEvents from "../../hooks/useEvents";
 
 interface Props {
     show: boolean,
@@ -11,6 +14,21 @@ function AddEventModal({show, day, onClose}: Props) {
 
   const formattedDate = day?.toISOString().substring(0, 10);
 
+  const events = useEvents();
+
+  async function handleOnSubmit(e: FormEvent<HTMLFormElement>){
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const {name, date} = Object.fromEntries(formData.entries());
+
+    if(typeof name == "string" && typeof date == "string" ){
+      const newEvent = await createEvent({name, date})
+      events?.addEvent(newEvent);
+      onClose();
+    }
+  }
+ 
   return (
     <ModalWrapper
     onClose={onClose}
@@ -18,7 +36,7 @@ function AddEventModal({show, day, onClose}: Props) {
     title="Agregar Evento">
 
 
-        <form className="flex flex-col gap-3">
+        <form className="flex flex-col gap-3" onSubmit={handleOnSubmit}>
           
             <label htmlFor="date" className="font-semibold">Fecha: </label>
             <input name="date" type="date" defaultValue={formattedDate} />

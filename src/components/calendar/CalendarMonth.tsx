@@ -35,6 +35,7 @@ function CalendarMonth({ daysMonth }: Props) {
         </div>
         <EventModal show={showInfo} day={selectedDay} onClose={() => setShowInfo(false)} />
         <AddEventModal show={showAddEvent} day={selectedDay} onClose={() =>  setShowAddEvent(false)} />
+
     </>
     
   )

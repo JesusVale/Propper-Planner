@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getEventsByDay } from "../../services/events";
 import { Event } from "../../types";
 import { XIcon } from "../icons";
+import EventList from "../events/EventList";
+import useEvents from "../../hooks/useEvents";
 
 interface Props {
   show: boolean,
@@ -11,15 +13,21 @@ interface Props {
 
 function EventModal({ show, day, onClose }: Props) {
 
+  const {
+    events,
+    setEvents
+  } = useEvents();
 
-  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() =>{
 
     if(day != null){
+      setLoading(true);
       getEventsByDay(day)
       .then(eventsFetched =>{
         setEvents(eventsFetched)
+        setLoading(false);
       });
     }
 
@@ -39,19 +47,16 @@ function EventModal({ show, day, onClose }: Props) {
           
         </header>
         
-
         {
-          events.length > 0 ?
-          <div className="mt-4 flex gap-4 flex-col">
-            {
-              events.map(event => (
-                <div key={`${event.id}${event.name}`} className="px-3 py-4 text-center font-bold text-lg rounded-md bg-slate-400">{event.name}</div>
-              ))
-            }
-          </div>
-
+          loading ?
+          (
+            <div className="mt-4 flex gap-4 flex-col">
+              <div className="px-3 py-4 text-center font-bold bg-gray-400 rounded-md animate-pulse">....</div>
+              <div className="px-3 py-4 text-center font-bold bg-gray-400 rounded-md animate-pulse">....</div>
+            </div>
+          )
           :
-          <div className="text-4xl text-gray-600 text-center my-6">No hay Eventos</div>
+          <EventList events={events} />
         }
 
     </aside>

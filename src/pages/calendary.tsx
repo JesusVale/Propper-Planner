@@ -1,7 +1,7 @@
 import useCalendar from "../hooks/useCalendar";
 import { RightArrow, LeftArrow } from "../components/icons";
 import CalendarMonth from "../components/calendar/CalendarMonth";
-import { SelectedDayProvider } from "../context/selectedDay";
+import { EventsProvider } from "../context/events";
 
 function Calendary() {
 
@@ -22,11 +22,11 @@ function Calendary() {
         loading ? 
         <div>Cargando...</div>
         :
-        <SelectedDayProvider>
+        <EventsProvider>
           <>   
             <CalendarMonth daysMonth={daysInMonth} />
           </>
-        </SelectedDayProvider>
+        </EventsProvider>
       }
       
       
