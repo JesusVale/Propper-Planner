@@ -42,7 +42,7 @@ function AddEventModal({show, day, onClose}: Props) {
             <input name="date" type="date" defaultValue={formattedDate} />
 
             <label htmlFor="name" className="font-semibold">Nombre Evento: </label>
-            <input className="border border-black" type="text" name="name" />
+            <input className="border border-gray-400 rounded-md px-2 py-1 text-sm" type="text" name="name" />
 
             <button className="bg-main-color text-white rounded-3xl py-1 px-9 font-bold w-fit mt-1 transition-colors duration-300 hover:cursor-pointer hover:bg-hover-color">Agregar</button>
 
