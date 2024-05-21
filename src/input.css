@@ -28,6 +28,13 @@ img{
     animation: hideModal 500ms forwards;
 }
 
+.routine-checkbox:checked + .checkdiv{
+
+    background-color: #0466F6;
+    color: white;
+
+}
+
 @keyframes showModal {
     
     0%{
