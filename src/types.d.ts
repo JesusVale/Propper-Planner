@@ -3,9 +3,10 @@ import { WEEK_DAYS } from "./constants";
 export type WeekDay = typeof WEEK_DAYS[number];
 
 export interface AssignmentRoutine {
-    id: int,
+    id?: int,
     name: string,
-    startDate: Date,
+    start: string,
+    end: string,
     days: WeekDay[];
 }
 
