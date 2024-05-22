@@ -13,5 +13,5 @@ export interface AssignmentRoutine {
 export interface Event {
     id?: int,
     name: string,
-    date: Date | string
+    date: string
 }

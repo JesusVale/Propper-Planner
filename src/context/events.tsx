@@ -6,7 +6,8 @@ interface ContextType {
     events: Event[],
     setEvents: Dispatch<Event[]>,
     addEvent: Dispatch<Event>,
-    removeEvent: Dispatch<number>
+    removeEvent: Dispatch<number>,
+    setEvent: Dispatch<Event>
 }
 
 const EventsContext = createContext<ContextType | undefined>(undefined);
@@ -29,10 +30,16 @@ function useEventsReducer(){
         payload: events
     })
 
+    const setEvent = (event: Event) => dispatch({
+        type: EventsActionKind.SET_EVENT,
+        payload: event
+    });
+
     return {
         addEvent,
         removeEvent,
         setEvents,
+        setEvent,
         state
     }
 
@@ -43,6 +50,7 @@ function EventsProvider({children}: {children: React.ReactNode}){
         addEvent,
         removeEvent,
         setEvents,
+        setEvent,
         state
     } = useEventsReducer();
 
@@ -52,6 +60,7 @@ function EventsProvider({children}: {children: React.ReactNode}){
             addEvent,
             removeEvent,
             setEvents,
+            setEvent,
             events: state
         }} >
 

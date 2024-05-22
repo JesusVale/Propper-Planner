@@ -6,7 +6,7 @@ export async function getEventsByDay(day: Date): Promise<Event[]>{
 
     const formattedDate = day?.toISOString().substring(0, 10);
 
-    const request = await fetch(`${API_URL_EVENTS}/${formattedDate}`);
+    const request = await fetch(`${API_URL_EVENTS}/day/${formattedDate}`);
     const events = await request.json();
     
     return events;
@@ -40,7 +40,30 @@ export async function deleteEvent(idEvent: number){
         return true;
     } catch(error){
         return false;
+    }    
+}
+
+export async function updateEvent(idEvent: number, event: Event) {
+
+    try{
+        const request = await fetch(`${API_URL_EVENTS}/${idEvent}`, {
+            headers: {
+                'Content-Type': "application/json"
+            },
+            method: "PUT",
+            body: JSON.stringify(event)
+        })
+
+        const eventFetched = await request.json()
+        return eventFetched;
+
+    } catch(error){
+        console.log(error);
     }
-    
-    
+}
+
+export async function getEventById(id: number): Promise<Event>{
+    const request = await fetch(`${API_URL_EVENTS}/${id}`);
+    const event = await request.json();
+    return event;
 }
