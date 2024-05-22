@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getEventsByDay } from "../../services/events";
-import { Event } from "../../types";
 import { XIcon } from "../icons";
 import EventList from "../events/EventList";
 import useEvents from "../../hooks/useEvents";
@@ -8,10 +7,11 @@ import useEvents from "../../hooks/useEvents";
 interface Props {
   show: boolean,
   day: Date | null,
-  onClose: () => void
+  onClose: () => void,
+  onShow: () => void
 }
 
-function EventModal({ show, day, onClose }: Props) {
+function EventModal({ show, day, onClose, onShow }: Props) {
 
   const {
     events,
@@ -56,7 +56,7 @@ function EventModal({ show, day, onClose }: Props) {
             </div>
           )
           :
-          <EventList events={events} />
+          <EventList events={events} onShow={onShow} />
         }
 
     </aside>

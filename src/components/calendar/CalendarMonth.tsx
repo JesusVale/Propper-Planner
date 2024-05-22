@@ -3,6 +3,7 @@ import CalendarHeader from "./CalendarHeader";
 import CalendarTab from "./CalendarTab";
 import EventModal from "../modals/EventModal";
 import AddEventModal from "../modals/AddEventModal";
+import { EditProvider } from "../../context/edit";
 
 interface Props {
     daysMonth: Date[]
@@ -16,7 +17,8 @@ function CalendarMonth({ daysMonth }: Props) {
     const [selectedDay, setSelectedDay] = useState<Date | null>(null);
 
   return (
-    <>
+    <EditProvider>
+
         <div className="grid-responsive mt-7">
             <CalendarHeader />
             {
@@ -29,14 +31,13 @@ function CalendarMonth({ daysMonth }: Props) {
                     onShowEvents={() => {setSelectedDay(date); setShowInfo(true); setShowAddEvent(false)}}
                     onShowAddEvent={() =>{setSelectedDay(date); setShowAddEvent(true); setShowInfo(false)}}
                     />
-                    
                 ))
             }
         </div>
-        <EventModal show={showInfo} day={selectedDay} onClose={() => setShowInfo(false)} />
+        <EventModal show={showInfo} day={selectedDay} onClose={() => setShowInfo(false)} onShow={() =>  setShowAddEvent(true)} />
         <AddEventModal show={showAddEvent} day={selectedDay} onClose={() =>  setShowAddEvent(false)} />
 
-    </>
+    </EditProvider>
     
   )
 }

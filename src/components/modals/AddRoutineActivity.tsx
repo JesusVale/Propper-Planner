@@ -27,7 +27,6 @@ function AddRoutineActivity({onClose, show, onAdd}: Props) {
         await addRoutineEvent(routine);
         await onAdd();
         onClose();
-
     }
 
 
@@ -37,9 +36,8 @@ function AddRoutineActivity({onClose, show, onAdd}: Props) {
     onClose={onClose}
     show={show}
     >
-
         <form className="flex flex-col gap-3" onSubmit={handleOnSubmit}>
-
+            
             <div className="flex flex-col gap-2">
                 <label htmlFor="name" className="font-semibold">Name</label>
                 <input type="text" name="name" className="border border-gray-400 rounded-md px-2 py-1 text-sm" />
@@ -65,23 +63,17 @@ function AddRoutineActivity({onClose, show, onAdd}: Props) {
             </div>
 
             <div className="flex gap-2 flex-col">
-
                 <label htmlFor="start" className="font-semibold">Start</label>
                 <input type="time" name="start" />
-                
             </div>
 
             <div className="flex gap-2 flex-col">
-
                 <label htmlFor="end" className="font-semibold">End</label>
                 <input type="time" name="end" />
-                
             </div>
 
             <div>
-
                 <button className="bg-main-color text-white rounded-lg py-1 px-5 text-md w-fit mt-2 transition-colors duration-300 hover:cursor-pointer hover:bg-hover-color">Agregar</button>
-
             </div>
 
         </form>

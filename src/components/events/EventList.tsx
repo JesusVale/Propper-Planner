@@ -4,15 +4,22 @@ import ConfirmModal from "../modals/ConfirmModal";
 import { useState } from "react";
 import { deleteEvent } from "../../services/events";
 import useEvents from "../../hooks/useEvents";
+import useEditMode from "../../hooks/useEditMode";
 
 interface Props {
-    events: Event[]
+    events: Event[],
+    onShow: () => void
 }
 
-function EventList({ events }: Props) {
+function EventList({ events, onShow }: Props) {
 
   const [selectedEvent, setSelectedEvent] = useState<null | Event>(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+  const {
+    setEditMode,
+    setSelectedItemId
+  } = useEditMode();
 
   const {
     removeEvent
@@ -37,6 +44,17 @@ function EventList({ events }: Props) {
       })
   }
 
+  function onEdit(id: number){
+
+    return () =>{
+      setEditMode(true);
+      setSelectedItemId(id);
+      onShow();
+      console.log("Pressing edit");
+    }
+
+  }
+
   return (
     <>
         {
@@ -44,7 +62,7 @@ function EventList({ events }: Props) {
           <div className="mt-4 flex gap-4 flex-col">
             {
               events.map(event => (
-                <EventCard key={`${event.id}${event.name}`} event={event} onClickDelete={deleteEventModal(event)} />
+                <EventCard key={`${event.id}${event.name}`} event={event} onClickDelete={deleteEventModal(event)} onClickEdit={onEdit(event.id)} />
               ))
             }
           </div>
