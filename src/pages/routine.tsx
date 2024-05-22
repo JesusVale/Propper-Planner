@@ -6,7 +6,7 @@ import { AssignmentRoutine, WeekDay } from "../types";
 import WeekDaySelector from "../components/WeekDaySelector";
 import AddRoutineActivity from "../components/modals/AddRoutineActivity";
 import RoutineList from "../components/routines/RoutineList";
-
+import { EditProvider } from "../context/edit";
 
 function Routine() {
 
@@ -20,6 +20,10 @@ function Routine() {
     setRoutine(routines);
   }, [selectedDay])
 
+  function onShow(){
+    setShowAddModal(true);
+  }
+
   useEffect(() =>{
     async function setRoutines(){
       const routines = await getDayRoutine(selectedDay);
@@ -29,28 +33,31 @@ function Routine() {
   },[selectedDay])
 
   return (
-    <section className="mx-auto w-9/12 mt-3">
+    <EditProvider>
+
+      <section className="mx-auto w-9/12 mt-3">
+
         <header className="flex gap-1 flex-col">
 
-            <div className="flex justify-between">
-              <h2 className="font-bold text-3xl">Mi rutina</h2>
+          <div className="flex justify-between">
+            <h2 className="font-bold text-3xl">Mi rutina</h2>
 
-              <button className="bg-main-color text-white p-2 rounded-lg flex gap-2 items-center transition-colors duration-200 hover:bg-hover-color" 
-              onClick={() => setShowAddModal(true)}>
+            <button className="bg-main-color text-white p-2 rounded-lg flex gap-2 items-center transition-colors duration-200 hover:bg-hover-color" 
+            onClick={() => setShowAddModal(true)}>
 
-                  <span className="font-bold">Agregar Actividad</span>
-                  <PlusIcon width={20} height={20} color="#fff" />
+                <span className="font-bold">Agregar Actividad</span>
+                <PlusIcon width={20} height={20} color="#fff" />
 
-              </button>
-            </div>
-            
-            <WeekDaySelector selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
+            </button>
+          </div>
+          
+          <WeekDaySelector selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
 
         </header>
 
         <div className="flex flex-col mt-7 gap-5">
 
-          <RoutineList routines={routine} onChange={onChange} />
+          <RoutineList routines={routine} onChange={onChange} onShow={onShow} />
 
         </div>
         <AddRoutineActivity 
@@ -58,7 +65,12 @@ function Routine() {
         show={showAddModal}
         onAdd={onChange}
         />
-    </section>
+
+      </section>
+
+
+    </EditProvider>
+    
   )
 }
 

@@ -3,16 +3,22 @@ import { AssignmentRoutine } from "../../types";
 import { DeleteIcon, TimeIcon, EditIcon } from "../icons";
 import ConfirmModal from "../modals/ConfirmModal";
 import { deleteRoutineActivity } from "../../services/routines";
+import useEditMode from "../../hooks/useEditMode";
 
 interface Props {
     routines: AssignmentRoutine[],
     onChange: () => void
+    onShow: () => void
 }
 
-function RoutineList({routines, onChange}: Props) {
+function RoutineList({routines, onChange, onShow}: Props) {
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState<AssignmentRoutine | null>(null);
+  const {
+    setEditMode,
+    setSelectedItemId
+  } = useEditMode();
 
 
   async function onConfirmDelete(){
@@ -32,6 +38,14 @@ function RoutineList({routines, onChange}: Props) {
     
   }
 
+  function onEdit(id: number){
+    return () =>{
+      setEditMode(true);
+      setSelectedItemId(id);
+      onShow();
+    }
+  }
+
   return (
     <>  
         {
@@ -47,7 +61,7 @@ function RoutineList({routines, onChange}: Props) {
                     <button onClick={handleOnClickDelete(activity)} className="text-gray-400 hover:text-main-color transition-colors">
                       <DeleteIcon width={20} height={20} />
                     </button>
-                    <button className="text-gray-400 hover:text-main-color transition-colors">
+                    <button onClick={onEdit(activity.id)} className="text-gray-400 hover:text-main-color transition-colors">
                       <EditIcon width={20} height={20} />
                     </button>
 

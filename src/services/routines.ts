@@ -4,7 +4,7 @@ import { formatTime } from '../utils/time';
 
 export async function getDayRoutine(day: WeekDay): Promise<AssignmentRoutine[]>{
 
-    const request = await fetch(`${API_URL_EVENTS}/${day}`);
+    const request = await fetch(`${API_URL_EVENTS}/day/${day}`);
     const routines = await request.json();
 
     const routinesFormatted = routines.map((routine: AssignmentRoutine) => {
@@ -17,6 +17,13 @@ export async function getDayRoutine(day: WeekDay): Promise<AssignmentRoutine[]>{
 
     return routinesFormatted;
 
+}
+
+export async function getRoutineActivityById(id: number) {
+    const request = await fetch(`${API_URL_EVENTS}/${id}`);
+    const routine = await request.json();
+
+    return routine;
 }
 
 export async function addRoutineEvent(assignmentRoutine: AssignmentRoutine){
@@ -48,6 +55,25 @@ export async function deleteRoutineActivity(id: number){
     } catch(error){
         console.log(error);
         return false;
+    }
+
+}
+
+export async function updateRoutineActivity(id: number, routine: AssignmentRoutine) {
+    
+    try{
+        const request = await fetch(`${API_URL_EVENTS}/${id}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify(routine)
+        });
+
+        const activity = request.json();
+        return activity;
+    } catch(error){
+        console.log(error);
     }
 
 }
