@@ -3,11 +3,11 @@ import HeaderLinkTab from "./header-link-tab";
 
 const headerRoutes = [
   {
-    text: "Calendario",
+    text: "Calendary",
     path: "/"
   },
   {
-    text: "Mi Rutina",
+    text: "My Routine",
     path: "/routine"
   }
 ]

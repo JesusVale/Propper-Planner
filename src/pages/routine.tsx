@@ -7,6 +7,7 @@ import WeekDaySelector from "../components/WeekDaySelector";
 import AddRoutineActivity from "../components/modals/AddRoutineActivity";
 import RoutineList from "../components/routines/RoutineList";
 import { EditProvider } from "../context/edit";
+import {Helmet} from "react-helmet";
 
 function Routine() {
 
@@ -34,18 +35,22 @@ function Routine() {
 
   return (
     <EditProvider>
+      <Helmet>
+        <title>Propper Planner | Routine</title>
+        <meta name="Home page" content="Shows a calendary that allows you to create and see events" />
+      </Helmet>
 
       <section className="mx-auto w-9/12 mt-3">
 
         <header className="flex gap-1 flex-col">
 
           <div className="flex justify-between">
-            <h2 className="font-bold text-3xl">Mi rutina</h2>
+            <h2 className="font-bold text-3xl">My routine</h2>
 
             <button className="bg-main-color text-white p-2 rounded-lg flex gap-2 items-center transition-colors duration-200 hover:bg-hover-color" 
             onClick={() => setShowAddModal(true)}>
 
-                <span className="font-bold">Agregar Actividad</span>
+                <span className="font-bold">Create Activity</span>
                 <PlusIcon width={20} height={20} color="#fff" />
 
             </button>

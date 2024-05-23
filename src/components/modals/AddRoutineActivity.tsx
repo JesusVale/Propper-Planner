@@ -83,7 +83,7 @@ function AddRoutineActivity({onClose, show, onAdd}: Props) {
 
   return (
     <ModalWrapper
-    title="Agregar Actividad"
+    title="Create Activity"
     onClose={setDefault}
     show={show}
     >

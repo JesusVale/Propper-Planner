@@ -77,17 +77,17 @@ function AddEventModal({show, day = new Date(), onClose}: Props) {
     <ModalWrapper
     onClose={setInitialStateForm}
     show={show}
-    title="Agregar Evento">
+    title="Create Evento">
 
         <form className="flex flex-col gap-3" onSubmit={handleOnSubmit}>
           
-            <label htmlFor="date" className="font-semibold">Fecha: </label>
+            <label htmlFor="date" className="font-semibold">Date: </label>
             <input name="date" type="date" defaultValue={editMode? event.date : formattedDate} />
 
-            <label htmlFor="name" className="font-semibold">Nombre Evento: </label>
+            <label htmlFor="name" className="font-semibold">Event name: </label>
             <input className="border border-gray-400 rounded-md px-2 py-1 text-sm" defaultValue={event.name} type="text" name="name" />
 
-            <button className="bg-main-color text-white rounded-3xl py-1 px-9 font-bold w-fit mt-1 transition-colors duration-300 hover:cursor-pointer hover:bg-hover-color">Agregar</button>
+            <button className="bg-main-color text-white rounded-3xl py-1 px-9 font-bold w-fit mt-1 transition-colors duration-300 hover:cursor-pointer hover:bg-hover-color">Create</button>
 
         </form>
 

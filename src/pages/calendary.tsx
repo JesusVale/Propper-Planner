@@ -2,6 +2,7 @@ import useCalendar from "../hooks/useCalendar";
 import { RightArrow, LeftArrow } from "../components/icons";
 import CalendarMonth from "../components/calendar/CalendarMonth";
 import { EventsProvider } from "../context/events";
+import {Helmet} from "react-helmet";
 
 function Calendary() {
 
@@ -9,6 +10,10 @@ function Calendary() {
 
   return (
     <div className="mx-auto w-9/12">
+      <Helmet>
+        <title>Propper Planner | Home</title>
+        <meta name="Home page" content="Shows a calendary that allows you to create and see events" />
+      </Helmet>
       <div className="flex justify-between">
         <button onClick={removeOne} className="bg-main-color rounded-[50%] w-12 h-12 flex justify-center items-center">
           <LeftArrow color="#fff" width={30} height={30} />
@@ -20,7 +25,7 @@ function Calendary() {
       </div>
       {
         loading ? 
-        <div>Cargando...</div>
+        <div>Loading...</div>
         :
         <EventsProvider>
           <>   
