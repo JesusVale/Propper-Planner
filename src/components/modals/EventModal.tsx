@@ -39,7 +39,7 @@ function EventModal({ show, day, onClose, onShow }: Props) {
         <header className=" py-3 flex justify-between items-center">
 
           <h4 className="font-bold text-3xl">
-            Eventos - {day?.toLocaleDateString()}
+            Events - {day?.toLocaleDateString()}
           </h4>
           <button className="cursor-pointer" onClick={onClose}>
             <XIcon width={25} height={25} />

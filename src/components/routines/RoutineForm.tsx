@@ -53,7 +53,7 @@ function RoutineForm({routineActivity, handleOnSubmit}: Props) {
         </div>
 
         <div>
-            <button className="bg-main-color text-white rounded-lg py-1 px-5 text-md w-fit mt-2 transition-colors duration-300 hover:cursor-pointer hover:bg-hover-color">Agregar</button>
+            <button className="bg-main-color text-white rounded-lg py-1 px-5 text-md w-fit mt-2 transition-colors duration-300 hover:cursor-pointer hover:bg-hover-color">Create</button>
         </div>
 
     </form>

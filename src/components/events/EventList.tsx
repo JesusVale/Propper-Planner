@@ -68,7 +68,7 @@ function EventList({ events, onShow }: Props) {
           </div>
 
           :
-          <div className="text-4xl text-gray-600 text-center my-6">No hay Eventos</div>
+          <div className="text-4xl text-gray-600 text-center my-6">There are no events for the moment</div>
         }
         <ConfirmModal 
         text={`¿Esta seguro que desea eliminar el evento ${selectedEvent?.name}?`}
